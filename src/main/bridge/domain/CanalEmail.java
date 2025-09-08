@@ -11,9 +11,4 @@ public class CanalEmail implements Canal {
   public String getTipoCanal() {
     return "EMAIL";
   }
-
-  @Override
-  public boolean estaDisponible() {
-    return true;
-  }
 }

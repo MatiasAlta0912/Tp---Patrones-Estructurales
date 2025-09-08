@@ -11,9 +11,4 @@ public class CanalSMS implements Canal {
   public String getTipoCanal() {
     return "SMS";
   }
-
-  @Override
-  public boolean estaDisponible() {
-    return true;
-  }
 }

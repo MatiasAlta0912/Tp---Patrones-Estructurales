@@ -1,34 +1,40 @@
 package main.bridge.domain;
 
-public abstract class Notificacion {
-  protected Canal canal;
-  protected String mensaje;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-  public Notificacion(Canal canal) {
-    this.canal = canal;
-  }
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@SuperBuilder
+public abstract class Notificacion {
+  protected List<Canal> canal;
+  protected String mensaje;
+  List<String> destinatarios = new ArrayList<>();
+
+  public Notificacion() {}
 
   protected abstract String getTipoNotificacion();
 
-  public final void enviar(String destinatario) {
-    if (!canal.estaDisponible()) {
-      System.out.println("No se puede enviar la notificacion");
+  public final void enviar() {
+    if (destinatarios.isEmpty()) {
+      System.out.println("No hay destinatarios asignados para notificar");
+    } else if (canal.isEmpty()) {
+      System.out.println("No hay canal asignados para notificar");
+    } else if (mensaje == null) {
+      System.out.println("No hay mensaje asignados para notificar");
     }
 
-    System.out.println("Preparando notificacion para enviar como: " + getTipoNotificacion());
-
-    canal.enviar(getMensaje());
-  }
-
-  public void setMensaje(String mensaje) {
-    this.mensaje = mensaje;
-  }
-
-  public String getMensaje() {
-    return mensaje;
-  }
-
-  public void cambiarCanal(Canal canal) {
-    this.canal = canal;
+    for (Canal canal : canal) {
+    System.out.println("Preparando notificacion/es para enviar como: " + getTipoNotificacion() + " a traves de: " + canal.getTipoCanal());
+      for (String destinatario : destinatarios) {
+        System.out.println("Destinatario: " + destinatario);
+        canal.enviar(getMensaje());
+      }
+    }
   }
 }
