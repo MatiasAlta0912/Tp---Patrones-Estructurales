@@ -11,11 +11,16 @@ public class PlanDescargasOffline extends PlanDecorator {
 
   @Override
   public String getDescripcion() {
-    return super.getDescripcion() + " + Descargas offline";
+    return super.getDescripcion() + " + " + this.getNombre();
   }
 
   @Override
-  public String getCosto() {
+  public double getCosto() {
     return super.getCosto() + 430.5;
+  }
+
+  @Override
+  public String getNombre() {
+    return "Descargas offline";
   }
 }

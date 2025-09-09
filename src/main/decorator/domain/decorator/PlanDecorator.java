@@ -16,7 +16,7 @@ public abstract class PlanDecorator implements Plan {
   }
 
   @Override
-  public String getCosto() {
+  public double getCosto() {
     return  this.plan.getCosto();
   }
 
